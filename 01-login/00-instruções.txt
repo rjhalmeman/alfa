@@ -1,0 +1,13 @@
+Tela de login
+Usar cores suaves
+painel centralizado
+
+Ler pk 
+se existe
+        renderizar o container
+        mostrar nome
+        solicitar a senha
+
+se a senha estiver correta
+    salvar credenciais para uso enquanto não sair da pagina do navegador
+

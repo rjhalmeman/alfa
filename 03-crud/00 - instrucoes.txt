@@ -1,0 +1,3 @@
+verificar se credenciais permitem acessar essa pagina
+ - mostrar menu com links para cada cadastro possível
+
