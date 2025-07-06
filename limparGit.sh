@@ -1,13 +1,10 @@
 #!/bin/bash
 
-# Verifica se foi passado o nome da branch
-if [ -z "$1" ]; then
-    echo "Uso: ./inicializa_branch.sh <nome-da-branch>"
-    exit 1
-fi
-
-branch="$1"
+# Define o nome da branch como o nome do diretório atual
+branch="$(basename "$PWD")"
 remote_url="https://github.com/rjhalmeman/alfa.git"
+
+echo "Usando '$branch' como nome da branch."
 
 # Remove pasta .git antiga (se existir)
 if [ -d ".git" ]; then
@@ -31,8 +28,18 @@ git add .
 timestamp=$(date +"%d/%m/%Y - %H:%M:%S")
 git commit -m "Início do $branch - $timestamp"
 
-# Envia para o GitHub
-git push -u origin "$branch" --force
-
-echo "Branch '$branch' criada e enviada com sucesso!"
+# Tenta enviar para o GitHub
+if ! git push -u origin "$branch"; then
+    echo
+    echo "Erro ao fazer push: a branch remota já existe e tem histórico diferente."
+    read -p "Deseja forçar o push com --force e sobrescrever o remoto? (s/n): " forcar
+    if [[ "$forcar" == "s" || "$forcar" == "S" ]]; then
+        git push -u origin "$branch" --force
+    else
+        echo "Push cancelado."
+        exit 1
+    fi
+else
+    echo "Branch '$branch' criada e enviada com sucesso!"
+fi
 

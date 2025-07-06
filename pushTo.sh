@@ -4,19 +4,15 @@
 default_remote="https://github.com/rjhalmeman/alfa"
 
 # Verifica se o git está instalado
-if ! command -v git &> /dev/null
-then
+if ! command -v git &> /dev/null; then
     echo "O Git não está instalado. Por favor, instale o Git antes de continuar."
     exit 1
 fi
 
-# Verifica se o nome da branch foi passado como argumento
-if [ -z "$1" ]; then
-    echo "Erro: informe o nome da branch como argumento."
-    exit 1
-fi
+# Usa o nome da pasta atual como nome da branch
+branch="$(basename "$PWD")"
 
-branch="$1"
+echo "Usando '$branch' como nome da branch."
 
 # Adiciona o repositório remoto se ainda não estiver adicionado
 if ! git remote get-url origin &> /dev/null; then
@@ -31,22 +27,30 @@ if git show-ref --verify --quiet "refs/heads/$branch" || git ls-remote --exit-co
         echo "Operação cancelada."
         exit 1
     fi
-    # Muda para a branch existente
     git checkout "$branch"
 else
-    # Cria e muda para a nova branch
     git checkout -b "$branch"
 fi
 
-# Adiciona todas as alterações ao índice do Git
+# Adiciona todos os arquivos
 git add .
 
-# Obtém a data e hora atual e formata para o formato desejado
+# Commit com timestamp
 timestamp=$(date +"%d/%m/%Y - %H:%M:%S")
-
-# Realiza um commit com a mensagem contendo a data e hora
 git commit -m "$timestamp"
 
-# Faz push para o repositório remoto
-git push -u origin "$branch"
+# Tenta o push
+if ! git push -u origin "$branch"; then
+    echo
+    echo "Erro ao fazer push: a branch remota já existe e tem histórico diferente."
+    read -p "Deseja forçar o push com --force e sobrescrever o remoto? (s/n): " forcar
+    if [[ "$forcar" == "s" || "$forcar" == "S" ]]; then
+        git push -u origin "$branch" --force
+    else
+        echo "Push cancelado."
+        exit 1
+    fi
+fi
+
+echo "Branch '$branch' enviada com sucesso!"
 
