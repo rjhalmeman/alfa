@@ -1,0 +1,6 @@
+# faz push sem mexer nas configurações do git
+
+
+git add .
+git commit -m "ajustes"
+git push https://rdmsHalmeman@github.com/rdmsHalmeman/gabi-murback-3bim.git
