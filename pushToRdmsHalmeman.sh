@@ -22,9 +22,10 @@ then
     exit
 fi
 
+
 # Verifica se o remote existe, se não, adiciona
 if ! git remote get-url "$remote_name" &> /dev/null; then
-    default_remote="https://github.com/rjhalmeman/$current_folder"
+    default_remote="https://rdmshalmeman@github.com/rdmshalmeman/$current_folder"
     echo "Adicionando remote: $remote_name -> $default_remote"
     git remote add "$remote_name" "$default_remote"
 fi
