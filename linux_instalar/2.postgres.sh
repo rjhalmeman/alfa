@@ -81,10 +81,10 @@ echo "Criando usuário e configurando senha..."
 echo "=========================================="
 
 # Nome do usuário a ser criado
-NOVO_USUARIO="meuusuario"
+NOVO_USUARIO="gabis"
 
 # Senha padrão (altere conforme necessário)
-SENHA_PADRAO="minhasenha123"
+SENHA_PADRAO="Lageado001."
 
 # Entrar no PostgreSQL como superusuário e criar usuário
 echo "Criando usuário '$NOVO_USUARIO'..."
