@@ -1,0 +1,1 @@
+no linux mint, no nemo, para abrir uma pasta eu clico nela e escolho abrir no terminal no menu de contexto como eu crio um atalho de teclado para fazer isso? quero clicar na pasta e apertar f6, por exemplo.
