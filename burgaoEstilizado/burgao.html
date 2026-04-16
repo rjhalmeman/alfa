@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Burgão</title>
+    <style>
+        /* =========================================================
+           1. SELETOR UNIVERSAL (*)
+           Seleciona TODOS os elementos da página. Usamos para o "Reset", 
+           tirando margens padrão e mudando a fonte para uma mais moderna.
+        ========================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* =========================================================
+           2. SELETOR DE ELEMENTO (body, h1, table, th, td, button)
+           Seleciona os elementos diretamente pela sua tag HTML.
+        ========================================================= */
+        body {
+            /* Fundo da tela inteira: Azul muito claro quase branco */
+            background-color: #f0f8ff; 
+            /* Flexbox para centralizar o container na tela */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            /* Azul escuro para dar contraste no título */
+            color: #01579b; 
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Remove os espaços duplos entre as bordas da tabela */
+            margin-bottom: 20px;
+        }
+
+        th {
+            /* Azul médio para o cabeçalho da tabela */
+            background-color: #0288d1; 
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #b3e5fc; /* Linha sutil azul clara separando os itens */
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #0288d1;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        button {
+            /* Azul vibrante para o botão de ação */
+            background-color: #0277bd; 
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        /* Pseudoclasse para mudar a cor do botão ao passar o mouse */
+        button:hover {
+            background-color: #01579b; /* Fica um azul mais escuro */
+        }
+
+        /* =========================================================
+           3. SELETOR DE CLASSE (.classe)
+           Seleciona elementos que possuem o atributo class="". 
+           Ideal para criar blocos de layout reutilizáveis.
+        ========================================================= */
+        .container {
+            /* Exigência: Ocupar 70% do espaço vertical (vh) e horizontal (vw) */
+            width: 70vw;
+            height: 70vh;
+            
+            background-color: #ffffff; /* Fundo branco */
+            padding: 30px;
+            border-radius: 12px; /* Bordas arredondadas (visual moderno) */
+            box-shadow: 0 10px 30px rgba(1, 87, 155, 0.15); /* Sombra suave azulada */
+            
+            /* Caso a tela seja pequena, cria barra de rolagem interna */
+            overflow-y: auto; 
+        }
+
+        .aviso {
+            /* Exigência: Fundo vermelho, fonte branca e negrito */
+            background-color: #d32f2f;
+            color: #ffffff;
+            font-weight: bold;
+            
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* =========================================================
+           4. SELETOR DE ID (#id)
+           Seleciona um elemento ÚNICO na página que possui o atributo id="".
+        ========================================================= */
+        #resultado {
+            color: #01579b;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 26px;
+            background-color: #e1f5fe; /* Destaque com fundo azul ultra claro */
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <h1>Cardápio Burgão</h1>
+
+        <p class="aviso">Atenção: Confira os itens antes de fechar o pedido!</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Especificação</th>
+                    <th>Preço (R$)</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>100</td>
+                    <td>Cachorro quente</td>
+                    <td>18,10</td>
+                    <td><input type="number" id="qtd100" value="0" min="0"></td>
+                </tr>
+                <tr>
+                    <td>101</td>
+                    <td>Bauru simples</td>
+                    <td>11,30</td>
+                    <td><input type="number" id="qtd101" value="0" min="0"></td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>Bauru c/ovo</td>
+                    <td>11,50</td>
+                    <td><input type="number" id="qtd102" value="0" min="0"></td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td>Hamburger</td>
+                    <td>19,10</td>
+                    <td><input type="number" id="qtd103" value="0" min="0"></td>
+                </tr>
+                <tr>
+                    <td>104</td>
+                    <td>Cheeseburger</td>
+                    <td>21,30</td>
+                    <td><input type="number" id="qtd104" value="0" min="0"></td>
+                </tr>
+                <tr>
+                    <td>105</td>
+                    <td>Refrigerante</td>
+                    <td>6,00</td>
+                    <td><input type="number" id="qtd105" value="0" min="0"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button onclick="calcularTotal()">Calcular Total</button>
+
+        <h2 id="resultado">Total a pagar: R$ 0,00</h2>
+
+    </div>
+
+    <script>
+        function calcularTotal() {
+            let q100 = parseFloat(document.getElementById('qtd100').value);
+            let q101 = parseFloat(document.getElementById('qtd101').value);
+            let q102 = parseFloat(document.getElementById('qtd102').value);
+            let q103 = parseFloat(document.getElementById('qtd103').value);
+            let q104 = parseFloat(document.getElementById('qtd104').value);
+            let q105 = parseFloat(document.getElementById('qtd105').value);
+
+            let total = (q100 * 18.10) + 
+                        (q101 * 11.30) + 
+                        (q102 * 11.50) + 
+                        (q103 * 19.10) + 
+                        (q104 * 21.30) + 
+                        (q105 * 6.00);
+
+            document.getElementById('resultado').innerText = "Total a pagar: R$ " + total.toFixed(2).replace('.', ',');
+        }
+    </script>
+
+</body>
+</html>
