@@ -37,9 +37,9 @@ processar_grupo() {
     local nome_base=$1
     local arquivos_processados=()
     
-    echo "╔══════════════════════════════════════════════════════════════╗" >> "$ARQUIVO_SAIDA"
-    printf "║  ARQUIVO: %-56s ║\n" "$nome_base" >> "$ARQUIVO_SAIDA"
-    echo "╚══════════════════════════════════════════════════════════════╝" >> "$ARQUIVO_SAIDA"
+    
+    printf "  ARQUIVO: %-56s \n" "$nome_base" >> "$ARQUIVO_SAIDA"
+    
     echo "" >> "$ARQUIVO_SAIDA"
     
     # Processa cada extensão na ordem fornecida
@@ -50,17 +50,16 @@ processar_grupo() {
             arquivos_processados+=("$arquivo")
             
             # Cabeçalho do arquivo
-            echo "▶▶▶ Arquivo: $arquivo ◀◀◀" >> "$ARQUIVO_SAIDA"
-            echo "────────────────────────────────────────────────────────────────" >> "$ARQUIVO_SAIDA"
+            echo " Arquivo: $arquivo " >> "$ARQUIVO_SAIDA"
+         
             
             # Conteúdo do arquivo
             cat "$arquivo" >> "$ARQUIVO_SAIDA"
             
             # Adiciona linha em branco após o conteúdo
             echo "" >> "$ARQUIVO_SAIDA"
-            echo "" >> "$ARQUIVO_SAIDA"
-            
-            echo "────────────────────────────────────────────────────────────────" >> "$ARQUIVO_SAIDA"
+            echo "" >> "$ARQUIVO_SAIDA"            
+           
             echo "✓ Fim do arquivo: $arquivo" >> "$ARQUIVO_SAIDA"
             adicionar_separador
         fi
@@ -82,12 +81,7 @@ processar_grupo() {
 # Limpa o arquivo de saída
 > "$ARQUIVO_SAIDA"
 
-echo "════════════════════════════════════════════════════════════════════" >> "$ARQUIVO_SAIDA"
-echo "       RELATÓRIO DE CÓDIGOS - GERADO EM $(date '+%d/%m/%Y %H:%M:%S')" >> "$ARQUIVO_SAIDA"
-echo "════════════════════════════════════════════════════════════════════" >> "$ARQUIVO_SAIDA"
-echo "" >> "$ARQUIVO_SAIDA"
-echo "Extensões consideradas: ${EXTENSOES[*]}" >> "$ARQUIVO_SAIDA"
-echo "" >> "$ARQUIVO_SAIDA"
+
 adicionar_separador
 
 # Encontra todos os nomes base únicos
@@ -124,10 +118,3 @@ else
 fi
 
 echo "" >> "$ARQUIVO_SAIDA"
-echo "════════════════════════════════════════════════════════════════════" >> "$ARQUIVO_SAIDA"
-echo "✓ PROCESSO CONCLUÍDO - Total de grupos: ${#sorted_nomes[@]}" >> "$ARQUIVO_SAIDA"
-echo "════════════════════════════════════════════════════════════════════" >> "$ARQUIVO_SAIDA"
-
-echo "✓ Arquivo '$ARQUIVO_SAIDA' gerado com sucesso!"
-echo "✓ Extensões processadas: ${EXTENSOES[*]}"
-echo "✓ Total de grupos (nomes base): ${#sorted_nomes[@]}"
