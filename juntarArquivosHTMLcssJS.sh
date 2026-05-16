@@ -39,9 +39,7 @@ processar_grupo() {
     
     
     printf "  ARQUIVO: %-56s \n" "$nome_base" >> "$ARQUIVO_SAIDA"
-    
-    echo "" >> "$ARQUIVO_SAIDA"
-    
+   
     # Processa cada extensão na ordem fornecida
     for extensao in "${EXTENSOES[@]}"; do
         arquivo="${nome_base}.${extensao}"
@@ -81,8 +79,6 @@ processar_grupo() {
 # Limpa o arquivo de saída
 > "$ARQUIVO_SAIDA"
 
-
-adicionar_separador
 
 # Encontra todos os nomes base únicos
 # Para cada extensão, extrai o nome base e cria um conjunto único
