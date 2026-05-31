@@ -1,4 +1,10 @@
-Trate a imagem anexada como fotografia
+não quero transcrição
+
+use o nano banana
+
+quero como resposta uma imagem
+
+trate o anexo como fotografia
 
 Use o nano banana para melhoria de imagem profissional ultra-premium.
 
