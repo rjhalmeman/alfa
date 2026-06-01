@@ -1,19 +1,22 @@
 #!/bin/bash
 
-# Verifica argumentos
 if [ $# -ne 2 ]; then
     echo "Uso: $0 <origem> <destino>"
     echo "Exemplo: $0 foto.png resultado.png"
     exit 1
 fi
 
-# Verifica se arquivo existe
 if [ ! -f "$1" ]; then
     echo "Erro: Arquivo '$1' não encontrado!"
     exit 1
 fi
 
-# Converte para preto e branco nítido
-convert "$1" -colorspace Gray -threshold 50% -sharpen 0x1 "$2"
+# Converte garantindo fundo BRANCO e texto PRETO
+convert "$1" \
+    -colorspace Gray \
+    -threshold 50% \
+    -negate \
+    -sharpen 0x1 \
+    "$2"
 
-echo "✓ Convertido: $2"
+echo "✓ Convertido: $2 (fundo branco, texto preto)"

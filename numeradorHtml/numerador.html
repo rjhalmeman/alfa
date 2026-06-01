@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerador de Código Fonte</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            resize: vertical;
+
+            font-family: Consolas, Monaco, monospace;
+            font-size: 14px;
+
+            padding: 10px;
+
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .botoes {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        #codigoNumerado {
+            background-color: white;
+            border: 1px solid #ccc;
+            overflow-x: auto;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td.numero {
+            width: 70px;
+            text-align: right;
+            padding-right: 15px;
+            color: gray;
+            border-right: 1px solid #ddd;
+            user-select: none;
+            vertical-align: top;
+        }
+
+        td.codigo {
+            padding-left: 15px;
+            white-space: pre;
+            font-family: Consolas, Monaco, monospace;
+            vertical-align: top;
+        }
+
+        .info {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        @media print {
+
+            textarea,
+            .botoes,
+            h1,
+            .info {
+                display: none;
+            }
+
+            body {
+                margin: 0;
+                background: white;
+            }
+
+            #codigoNumerado {
+                border: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Numerador de Código Fonte</h1>
+
+    <textarea id="codigoFonte"
+        placeholder="Cole aqui seu código fonte..."></textarea>
+
+    <div class="botoes">
+        <button onclick="numerarLinhas()">Numerar Linhas</button>
+
+        <button onclick="gerarImagem()">
+            Gerar PNG
+        </button>
+
+        <button onclick="window.print()">
+            Imprimir
+        </button>
+
+        <button onclick="limpar()">
+            Limpar
+        </button>
+    </div>
+
+    <div class="info">
+        Total de linhas:
+        <span id="totalLinhas">0</span>
+    </div>
+
+    <br>
+
+    <div id="codigoNumerado"></div>
+
+    <script>
+
+        function escaparHTML(texto) {
+
+            return texto
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+        function numerarLinhas() {
+
+            const codigo =
+                document.getElementById("codigoFonte").value;
+
+            if (codigo.trim() === "") {
+
+                alert("Cole um código primeiro.");
+
+                return;
+            }
+
+            const linhas = codigo.split(/\r?\n/);
+
+            let html = "<table>";
+
+            for (let i = 0; i < linhas.length; i++) {
+
+                let linha = escaparHTML(linhas[i]);
+
+                if (linha === "") {
+                    linha = "&nbsp;";
+                }
+
+                html += `
+                <tr>
+                    <td class="numero">${i + 1}</td>
+                    <td class="codigo">${linha}</td>
+                </tr>
+                `;
+            }
+
+            html += "</table>";
+
+            document.getElementById("codigoNumerado").innerHTML = html;
+
+            document.getElementById("totalLinhas").textContent =
+                linhas.length;
+        }
+
+        function gerarImagem() {
+
+            const elemento =
+                document.getElementById("codigoNumerado");
+
+            if (elemento.innerHTML.trim() === "") {
+
+                alert("Primeiro gere a numeração.");
+
+                return;
+            }
+
+            html2canvas(elemento, {
+                scale: 2
+            })
+                .then(function (canvas) {
+
+                    const link =
+                        document.createElement("a");
+
+                    link.download =
+                        "codigo-numerado.png";
+
+                    link.href =
+                        canvas.toDataURL("image/png");
+
+                    link.click();
+                });
+        }
+
+        function limpar() {
+
+            document.getElementById("codigoFonte").value = "";
+
+            document.getElementById("codigoNumerado").innerHTML = "";
+
+            document.getElementById("totalLinhas").textContent = "0";
+
+            document.getElementById("codigoFonte").focus();
+        }
+
+        document
+            .getElementById("codigoFonte")
+            .addEventListener("keydown", function (e) {
+
+                if (e.key === "Tab") {
+
+                    e.preventDefault();
+
+                    const inicio = this.selectionStart;
+                    const fim = this.selectionEnd;
+
+                    this.value =
+                        this.value.substring(0, inicio)
+                        + "\t"
+                        + this.value.substring(fim);
+
+                    this.selectionStart =
+                        this.selectionEnd =
+                        inicio + 1;
+                }
+
+                if (e.ctrlKey && e.key === "Enter") {
+
+                    e.preventDefault();
+
+                    numerarLinhas();
+                }
+            });
+
+    </script>
+
+</body>
+
+</html>
