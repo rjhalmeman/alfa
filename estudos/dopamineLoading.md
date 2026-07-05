@@ -85,3 +85,52 @@ O "Dopamine Loading" não é sobre eliminar o prazer, mas sim sobre **reorganiza
 Você gostaria de responder a algumas perguntas para verificar se entendeu o conteúdo? Aqui vai a primeira:
 
 **Pergunta 1:** Qual é o principal problema de se consumir dopamina artificial (como redes sociais) *antes* de começar a estudar?
+
+
+--- 
+# Guia Rápido: Dopamine Loading para Estudos
+
+## O Conceito em 1 Frase
+**Trabalho duro primeiro, recompensa depois.** Reserve os estímulos de alta dopamina (redes sociais, jogos, comidas pesadas) para o final do dia, após concluir todas as tarefas importantes.
+
+---
+
+## O Problema: O Ciclo Vicioso
+- **Manhã:** Pico de dopamina (telefone, redes sociais, pornografia)
+- **Tentativa de estudar:** Estado de baixa dopamina → tarefa parece "infernal"
+- **Durante o dia:** Picos e vales constantes (redes sociais, carboidratos no almoço)
+- **Resultado:** Incapacidade de focar, procrastinação, estresse
+
+---
+
+## A Solução: Dopamine Loading
+
+### Pilares da Técnica
+1.  **Tarefa mais difícil primeiro:** Ao acordar, faça a atividade mais importante e desafiadora (ex: uma prova anterior).
+2.  **Evite estímulos artificiais durante o dia:** Sem redes sociais, vídeos, músicas estimulantes ou comidas pesadas (carboidratos) no almoço.
+3.  **Recompense-se no final do dia:** Após todo o trabalho concluído, aproveite Netflix, jogos, refeições mais pesadas e outras atividades prazerosas.
+
+### Rotina Prática (Exemplo)
+- **07:00 - 08:30:** Acordar, banho, luz solar. Nenhum estímulo artificial.
+- **08:30 - 15:00:** Estudo intenso, aulas. Sem telefone.
+- **12:00:** Almoço com **baixo teor de carboidratos**.
+- **15:00 - 19:00:** Segundo bloco de estudo (ex: outra prova anterior).
+- **19:00 - 22:00:** **Dopamine Loading!** Jantar com carboidratos, assistir anime, Netflix, ler por prazer.
+
+---
+
+## Dicas Extras
+- **Na academia:** Evite fones de ouvido e música alta. Mantenha a dopamina em níveis naturais.
+- **Se precisar estudar à noite:** Faça uma refeição leve, tome um banho e **estude primeiro**. As recompensas ficam para depois.
+- **Jejum matinal:** Não comer até o almoço pode ajudar a manter o foco (como o apresentador fez).
+
+---
+
+## Por que Funciona?
+O cérebro humano opera por **contraste**. Ao evitar picos artificiais de dopamina durante o dia, o trabalho árduo se torna mais fácil e menos doloroso. As recompensas no final do dia são mais significativas e não comprometem a produtividade.
+
+---
+
+**Conclusão:** O *Dopamine Loading* não é sobre eliminar o prazer, mas sim sobre **reorganizar a ordem das atividades** para usar a biologia do seu cérebro a seu favor.
+
+---
