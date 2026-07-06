@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numerador de Código Fonte Profissional</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:20px;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f5f5;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+textarea{
+    width:100%;
+    height:300px;
+    resize:vertical;
+    padding:10px;
+    font-family:Consolas,"Courier New",monospace;
+    font-size:14px;
+}
+
+.botoes{
+    margin:15px 0;
+}
+
+button{
+    padding:10px 15px;
+    cursor:pointer;
+    margin-right:5px;
+    margin-bottom:5px;
+}
+
+#areaCaptura{
+    text-align:center;
+    margin-top:20px;
+}
+
+#pagina{
+    display:inline-block;
+    text-align:left;
+    background:white;
+    border:1px solid #000;
+    padding:25px;
+}
+
+#codigoRenderizado{
+    margin:0;
+    white-space:pre;
+    line-height:1.4;
+    font-size:14px;
+    font-family:Consolas,"Courier New",monospace;
+}
+
+.info{
+    margin-top:10px;
+}
+
+@media print{
+    textarea,
+    .botoes,
+    .info,
+    h1{
+        display:none;
+    }
+
+    body{
+        background:white;
+        margin:0;
+    }
+
+    #pagina{
+        border:none;
+    }
+}
+</style>
+</head>
+<body>
+
+<h1>📝 Numerador de Código Fonte</h1>
+
+<textarea id="codigoFonte" placeholder="Cole aqui seu código fonte..."></textarea>
+
+<div class="botoes">
+    <button onclick="numerarLinhas()">Numerar Linhas</button>
+    <button onclick="gerarPNG()">Gerar PNG</button>
+    <button onclick="gerarPDF()">Gerar PDF</button>
+    <button onclick="window.print()">Imprimir</button>
+    <button onclick="limpar()">Limpar</button>
+</div>
+
+<div class="info">
+    Total de linhas: <span id="totalLinhas">0</span>
+</div>
+
+<div id="areaCaptura">
+    <div id="pagina">
+        <pre id="codigoRenderizado"></pre>
+    </div>
+</div>
+
+<script>
+
+function numerarLinhas(){
+
+    const codigo =
+        document.getElementById("codigoFonte").value;
+
+    if(codigo.trim()===""){
+        alert("Cole um código primeiro.");
+        return;
+    }
+
+    const linhas =
+        codigo.split(/\r?\n/);
+
+    let resultado = "";
+
+    const larguraNumero =
+        String(linhas.length).length;
+
+    for(let i=0;i<linhas.length;i++){
+
+        const numero =
+            String(i + 1)
+            .padStart(larguraNumero," ");
+
+        resultado +=
+            numero +
+            " | " +
+            linhas[i];
+
+        if(i < linhas.length - 1){
+            resultado += "\n";
+        }
+    }
+
+    document.getElementById("codigoRenderizado").textContent =
+        resultado;
+
+    document.getElementById("totalLinhas").textContent =
+        linhas.length;
+}
+
+async function gerarPNG(){
+
+    const pagina =
+        document.getElementById("pagina");
+
+    if(
+        document.getElementById("codigoRenderizado")
+        .textContent.trim() === ""
+    ){
+        alert("Primeiro gere a numeração.");
+        return;
+    }
+
+    const canvas =
+        await html2canvas(pagina,{
+            scale:4,
+            backgroundColor:"#ffffff"
+        });
+
+    const link =
+        document.createElement("a");
+
+    link.download =
+        "codigo-numerado.png";
+
+    link.href =
+        canvas.toDataURL("image/png");
+
+    link.click();
+}
+
+async function gerarPDF(){
+
+    const pagina =
+        document.getElementById("pagina");
+
+    if(
+        document.getElementById("codigoRenderizado")
+        .textContent.trim() === ""
+    ){
+        alert("Primeiro gere a numeração.");
+        return;
+    }
+
+    const canvas =
+        await html2canvas(pagina,{
+            scale:4,
+            backgroundColor:"#ffffff"
+        });
+
+    const imgData =
+        canvas.toDataURL("image/png");
+
+    const { jsPDF } =
+        window.jspdf;
+
+    const pdf =
+        new jsPDF("p","mm","a4");
+
+    const margem = 10;
+
+    const larguraPagina =
+        pdf.internal.pageSize.getWidth();
+
+    const alturaPagina =
+        pdf.internal.pageSize.getHeight();
+
+    const larguraUtil =
+        larguraPagina - (margem * 2);
+
+    const alturaUtil =
+        alturaPagina - (margem * 2);
+
+    const proporcao =
+        canvas.width / canvas.height;
+
+    let larguraImagem =
+        larguraUtil;
+
+    let alturaImagem =
+        larguraImagem / proporcao;
+
+    if(alturaImagem > alturaUtil){
+
+        alturaImagem =
+            alturaUtil;
+
+        larguraImagem =
+            alturaImagem * proporcao;
+    }
+
+    const x =
+        (larguraPagina - larguraImagem) / 2;
+
+    const y =
+        (alturaPagina - alturaImagem) / 2;
+
+    pdf.addImage(
+        imgData,
+        "PNG",
+        x,
+        y,
+        larguraImagem,
+        alturaImagem
+    );
+
+    pdf.save("codigo-numerado.pdf");
+}
+
+function limpar(){
+
+    document.getElementById("codigoFonte").value = "";
+
+    document.getElementById("codigoRenderizado").textContent = "";
+
+    document.getElementById("totalLinhas").textContent = "0";
+}
+
+document.getElementById("codigoFonte")
+.addEventListener("keydown",function(e){
+
+    if(e.key==="Tab"){
+
+        e.preventDefault();
+
+        const start =
+            this.selectionStart;
+
+        const end =
+            this.selectionEnd;
+
+        this.value =
+            this.value.substring(0,start)
+            + "\t"
+            + this.value.substring(end);
+
+        this.selectionStart =
+        this.selectionEnd =
+            start + 1;
+    }
+
+    if(e.ctrlKey && e.key==="Enter"){
+
+        e.preventDefault();
+
+        numerarLinhas();
+    }
+});
+
+</script>
+
+</body>
+</html>
