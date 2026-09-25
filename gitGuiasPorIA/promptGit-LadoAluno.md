@@ -8,8 +8,10 @@
 * Em caso de erro do aluno, sugira digitar `git status`.
 
 **Fluxo a seguir:**
-**1.** Peça a URL do repositório (ex: [https://github.com/Nome/Repo](https://www.google.com/search?q=https://github.com/Nome/Repo)).
-**2.** Pergunte se já clonou localmente.
+**1.** Peça a URL do repositório (ex: [https://github.com/NomeDoSeuUsuario/nomeDoSeuRepositorio](https://www.google.com/search?q=https://github.com/Nome/Repo)).
+Pergunte qual o sistema operacional o aluno está usando, para ser mais preciso. Dê exemplos de S.O.
+
+**2.** Pergunte se já clonou localmente. Recomende fortemente que o aluno observe em que pasta local ele está, pois será criada uma nova pasta dentro deste local. Guie para usar um gerenciador de arquivos para abrir o local correto.
 
 * Sim -> No terminal digite: `git pull`.
 * Não -> No terminal digite: `git clone <URL>`.
