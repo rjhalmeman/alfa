@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Fichas de Avaliação</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Gerador de Fichas de Estágio</h2>
+    
+    <div class="form-group">
+        <label for="data">Data:</label>
+        <input type="date" id="data">
+    </div>
+
+    <div class="form-group">
+        <label for="qtdFichas">Quantidade de fichas por aluno:</label>
+        <input type="number" id="qtdFichas" value="6" min="1" max="50">
+    </div>
+
+    <div class="form-group">
+        <label for="alunos">Nomes dos Alunos (um por linha):</label>
+        <textarea id="alunos" placeholder="Ivanilton Polato&#10;Luiz Arthur Feitosa dos Santos"></textarea>
+    </div>
+
+    <button type="button" onclick="gerarFichas()">Gerar Fichas</button>
+</div>
+
+<script src="controle.js"></script>
+</body>
+</html>
