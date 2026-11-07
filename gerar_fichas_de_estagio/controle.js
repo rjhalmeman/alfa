@@ -12,6 +12,27 @@ function formatarData(dataISO) {
     return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
+// Nova função para ordenar os alunos em ordem alfabética
+function ordenarAlunos() {
+    const textarea = document.getElementById('alunos');
+    textarea.value = textarea.value.toUpperCase();
+    
+    // Lê, limpa os espaços, remove linhas em branco e ordena com suporte a acentos
+    const alunosOrdenados = textarea.value
+        .split('\n')
+        .map(nome => nome.trim())
+        .filter(nome => nome.length > 0)
+        .sort((a, b) => a.localeCompare(b, 'pt-BR'));
+        
+    if (alunosOrdenados.length === 0) {
+        alert('Não há nomes para ordenar.');
+        return;
+    }
+
+    // Devolve para o textarea, separando por quebra de linha
+    textarea.value = alunosOrdenados.join('\n');
+}
+
 function gerarFichas() {
     const inputData = document.getElementById('data').value;
     const qtdFichas = parseInt(document.getElementById('qtdFichas').value) || 1;

@@ -9,7 +9,7 @@
 <body>
 
 <div class="container">
-    <h2>Gerador de Fichas de Estágio</h2>
+    <h2>Gerador de Fichas para Avaliação de Estágio</h2>
     
     <div class="form-group">
         <label for="data">Data:</label>
@@ -18,13 +18,15 @@
 
     <div class="form-group">
         <label for="qtdFichas">Quantidade de fichas por aluno:</label>
-        <input type="number" id="qtdFichas" value="6" min="1" max="50">
+        <input type="number" id="qtdFichas" value="2" min="1" max="50">
     </div>
 
     <div class="form-group">
         <label for="alunos">Nomes dos Alunos (um por linha):</label>
-        <textarea id="alunos" placeholder="Ivanilton Polato&#10;Luiz Arthur Feitosa dos Santos"></textarea>
+        <textarea id="alunos" placeholder="João da Silva&#10;Maria Clara"></textarea>
+        <button type="button" class="btn-secundario" onclick="ordenarAlunos()">Ordem Alfabética (A-Z)</button>
     </div>
+    <h3>Coloque os nomes completos dos alunos, sendo um aluno por linha</h3>
 
     <button type="button" onclick="gerarFichas()">Gerar Fichas</button>
 </div>

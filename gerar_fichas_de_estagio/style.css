@@ -46,6 +46,7 @@ textarea {
     height: 140px;
     resize: vertical;
     font-family: inherit;
+    margin-bottom: 10px;
 }
 
 button {
@@ -63,4 +64,16 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+/* Estilo para o novo botão secundário */
+.btn-secundario {
+    background-color: #6c757d;
+    padding: 8px;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.btn-secundario:hover {
+    background-color: #5a6268;
 }
